@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
-import { getRandomColor, getReducedColor } from './randomColorGenerator.js'
-import { updateColors, updateChildColors } from './updateColor.js'
+import { getReducedColor } from './randomColorGenerator.js'
 import Tier2 from './Tier2'
 
 
@@ -15,11 +13,21 @@ export default class Tier1 extends Component {
     }
   }
 
+  handleClick = () => {
+    // your code here!
+  }
+
+  handleChildClick = () => {
+    // your code here!
+  }
+
   render() {
+    // hard coded color values have been added below, though they won't be
+    // present in our solution. What should they be replaced with?
     return (
-      <div onClick={updateColors.bind(this)} className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
-        <Tier2 handleChildClick={updateChildColors.bind(this)} color={this.state.childColor} />
-        <Tier2 handleChildClick={updateChildColors.bind(this)} color={this.state.childColor} />
+      <div onClick={() => {this.setState({color: "#000"})}} className="tier1" style={{backgroundColor: this.state.color, color: this.state.color}}>
+        <Tier2 handleChildClick={null} color={"#0F0"} />
+        <Tier2 handleChildClick={null} color={"#0FF"} />
       </div>
     )
   }
