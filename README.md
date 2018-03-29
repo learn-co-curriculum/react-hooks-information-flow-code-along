@@ -45,7 +45,7 @@ The gif below shows what a fully working application should look like. While you
 ![](https://learn-verified.s3.amazonaws.com/sample-functionality.gif)
 
 
-You will notice that even if children components change colors without their parents, a changing of their parents' colors resets resets them.
+You will notice that even if children components change colors without their parents, a changing of their parents' colors resets them.
 
 
 [sample-functionality]: "https://learn-verified.s3.amazonaws.com/sample-functionality.gif"
