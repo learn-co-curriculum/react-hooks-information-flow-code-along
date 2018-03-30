@@ -30,9 +30,9 @@ App
 
 Understanding that React components should communicate up and down the component tree, we want to make sure that the following behavior is exhibited:
 
-- When a `Tier` component is clicked it, and all other components of the same tier, should change colors (i.e. If a `Tier2` component is clicked, the other `Tier2` within the same parent component should also change color)
-- When a component's color changes all of its children components should change to a lighter shade of the same color
-- Components of the same tier should never communicate directly! For example, when a `tier3` component is clicked, it should communicate this _up_ to its `tier2` parent component (via a callback method that was passed). Following, the parent component can update all of its children components.
+- When a `Tier` component is clicked it, and all other components within the same parent, should change colors (i.e. If a `Tier2` component is clicked, the other `Tier2` within the same parent component should also change color)
+- When a component's color changes all of its children components should change to a lighter shade of the same color (use the imported `getReducedColor` function)
+- Components of the same level should never communicate directly! For example, when a `tier3` component is clicked, it should communicate this _up_ the component tree (i.e. via a callback method that was passed).
 
 The color changing functionality itself has already been implemented -- while you should feel free to, there is no need to alter the existing code in `src/randomColorGenerator.js`
 
@@ -44,8 +44,10 @@ The gif below shows what a fully working application should look like. While you
 
 ![](https://learn-verified.s3.amazonaws.com/sample-functionality.gif)
 
-
 You will notice that even if children components change colors without their parents, a changing of their parents' colors resets them.
 
+## Refactoring
 
-[sample-functionality]: "https://learn-verified.s3.amazonaws.com/sample-functionality.gif"
+Several different solution branches have been provided. Please complete your own solution before taking a look at them:
+  - Did your's match any of the same patterns, or was it a novel solution?
+  - How could we make our application more DRY?

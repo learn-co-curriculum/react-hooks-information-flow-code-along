@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import { getRandomColor } from './randomColorGenerator.js'
 import Tier1 from './Tier1.js'
 
 class App extends Component {
@@ -8,8 +7,8 @@ class App extends Component {
     const initialColor = getRandomColor()
     return (
       <div className="App">
-        <Tier1 color={ initialColor } />
-        <Tier1 color={ initialColor } />
+        <Tier1 />
+        <Tier1 />
       </div>
     )
   }
