@@ -11,10 +11,10 @@ In this lesson, we'll explore how to pass callback functions as props in order t
 
 ## How Does Information Flow Between Components?
 
-We already know, how to use props to pass information _down_ from parent to child. But how would we do the reverse? How might we have a child component send data to its parent component? In order to propagate information in the opposite direction, we can send a callback functions _as a prop_ from the parent component to it child.
+We already know, how to use props to pass information _down_ from parent to child. But how would we do the reverse? How might we have a child component send data to its parent component? In order to propagate information in the opposite direction, we can send a callback functions _as a prop_ from the parent component to its child.
 
 This allows the callback to be _owned_ by a different component than the one
-invoking it. Once invoked, the callback can send data to the parent component that _owns_ it, instead of the child component that _invoked_ it.
+invoking it. Once invoked, the callback can send data to or change state in the parent component that _owns_ it, instead of the child component that _invoked_ it.
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ App
 ## Deliverables
 - When either `Child` component is clicked, the `Parent` component should change color.
 
-`src/randomColorGenerator.js` has a helper function `getRandomColor()` implemented for you that generates random a color.
+`src/randomColorGenerator.js` has a helper function `getRandomColor()` implemented for you that generates a random color.
 
 
 #### Changing the color of Parent
@@ -90,7 +90,7 @@ class Child extends Component {
 }
 ```
 
-What we want to do now is pass this props into a React event handler.
+What we want to do now is pass this `handleColorChange` prop into a React event handler.
 
 ```js
 render() {
@@ -109,7 +109,7 @@ And Ta-Da! Now, if you go to the app, clicking on _either_ of the white rectangl
 ## Deliverables
 - When either `Child` component is clicked, it should change to its own background color to a random color, and the other `Child` component should change to _that same_ color.
 
-We could put some state in our `Child` component to keep track of its color. However, React components cannot pass data between 'sibling' components. Data can only flow up and down between parent/child. So if we update the color of one `Child` component, we have no way to pass that  data to the _other_ `Child` component. The solution is to store the color of the `Child` in the state of the `Parent` component. Then, we let the `Parent` component handle the passing of the data to each of it's children components.
+Now, we could put some state in our `Child` component to keep track of its color. However, React components cannot pass data between 'sibling' components. Data can only flow up and down between parent/child. So if we update the color of one `Child` component, we have no way to pass that  data to the _other_ `Child` component. The solution is to store the color of the `Child` in the state of the `Parent` component. Then, we let the `Parent` component handle the passing of that data to each of it's children components.
 
 ```js
 class Parent extends Component {
@@ -123,7 +123,7 @@ class Parent extends Component {
 }
 ```
 
-Since the data that represents the color of the two `Child` components live in `Parent`, we should that that data down as props:
+Since the data that represents the color of the two `Child` components lives in `Parent`, we should pass that data down as props:
 
 ```js
 render() {
