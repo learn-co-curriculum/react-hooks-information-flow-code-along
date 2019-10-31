@@ -136,7 +136,7 @@ render() {
 }
 ```
 
-Now let's actually use that props data in the `Child` component:
+Now let's actually use that props data in the `Child` component
 
 ```js
 class Child extends Component {
@@ -151,14 +151,29 @@ class Child extends Component {
 }
 ```
 
-Lastly, we have to update the `changeColor()` method in `Parent` to change not just the `color` state, but also the `childrenColor`
+Lastly, we have to update the `changeColor()` method in `Parent` to change not just the `color` state, but also the `childrenColor`. To practice sending data _back_ to the parent, let's change our `changeColor` to take in an argument of `newChildColor`.
 
 ```js
-changeColor = () => {
+changeColor = (newChildColor) => {
   this.setState({
     color: getRandomColor(),
-    childrenColor: getRandomColor()
+    childrenColor: newChildColor
   })
+}
+```
+
+Now that is function takes in an argument, we see you update `Child`:
+
+```js
+class Child extends Component {
+  render() {
+    return (
+      <div onClick={() => this.props.handleColorChange(getRandomColor())}
+        className="child"
+        style={{backgroundColor: this.props.color}}
+      ></div>
+    )
+  }
 }
 ```
 
