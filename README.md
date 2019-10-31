@@ -1,3 +1,5 @@
+# React Information Flow
+
 ## Overview
 
 In this lesson, we'll explore how to pass callback functions as props in order to change state in a parent component.
@@ -7,7 +9,7 @@ In this lesson, we'll explore how to pass callback functions as props in order t
 1. Practice enforcing React up-down information flow
 2. Practice changing state in a parent from a child component
 
-## React Information Flow
+## How Does Information Flow Between Components?
 
 We already know, how to use props to pass information _down_ from parent to child. But how would we do the reverse? How might we have a child component send data to its parent component? In order to propagate information in the opposite direction, we can send a callback functions _as a prop_ from the parent component to it child.
 
