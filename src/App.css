@@ -16,6 +16,24 @@
   height: 100%;
 }
 
+.parent {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 2.5% auto;
+  width: 47%;
+  height: 80%;
+}
+
+.child {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 8% auto;
+  width: 40%;
+  height: 70%;
+}
+
 .tier1 {
   display: flex;
   align-items: flex-end;
@@ -44,7 +62,7 @@
 
 /******************************************************************************/
 
-.tier1:hover, .tier2:hover, .tier3:hover {
+.tier1:hover, .tier2:hover, .tier3:hover, .parent:hover, .child:hover {
   cursor: pointer;
   animation: soft-glow 1s forwards ease-in-out infinite;
 }

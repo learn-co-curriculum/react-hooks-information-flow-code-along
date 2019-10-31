@@ -1,7 +1,11 @@
+## Overview
+
+In this lesson, we'll explore how to pass callback functions as props in order to change state in a parent component.
+
 ## Objectives
 
-- Practice enforcing React up-down information flow
-- Practice debugging
+1. Practice enforcing React up-down information flow
+2. Practice changing state in a parent from a child component
 
 ## React component structure
 
@@ -11,8 +15,14 @@ As you already know, a React application consists of many [components][component
 
 ## React information flow
 
-When developing in vanilla React, we adhere to the following data flow paradigm:
-- For information to propogate _down_ the component tree parents pass `props` to their children
+We already know, how to use props to pass information _down_ from parent to child. But how would we do the reverse? How might we have a child component send data to its parent component? In order to propagate information in the opposite direction, we can send a callback functions _as a prop_ from the parent component to it child.
+
+This allows the callback to be _owned_ by a different component than the one
+invoking it. Once invoked, the callback can send data to the parent component that _owns_ it, instead of the child component that _invoked_ it.
+
+
+Let's summarize:
+- For information to propagate _down_ the component tree parents pass `props` to their children
 - For information to propagate _up_ the component tree, we typically invoke callbacks that were passed from parents to children as `props`
 
 ## Getting Started
@@ -20,20 +30,9 @@ When developing in vanilla React, we adhere to the following data flow paradigm:
 Take a moment to familiarize yourself with the code base. We have a simple application that renders 3 unique components: `Tier1`, `Tier2`, and `Tier3`. Following is what our component structure looks like when fully rendered:
 ```
 App
-├───Tier1
-│   ├───Tier2
-│   │   └───Tier3
-│   │   └───Tier3
-│   └───Tier2
-│       └───Tier3
-│       └───Tier3
-└───Tier1
-    ├───Tier2
-    │   └───Tier3
-    │   └───Tier3
-    └───Tier2
-        └───Tier3
-        └───Tier3
+└───Parent
+    ├───Child
+    └───Child
 ```
 
 `src/randomColorGenerator.js` has a few helper functions implemented for you that generate random colors, as well as lighter tints of a specific color.
@@ -57,9 +56,3 @@ The gif below shows what a fully working application should look like. While you
 ![](https://learn-verified.s3.amazonaws.com/sample-functionality.gif)
 
 You will notice that even if children components change colors without their parents, a changing of their parents' colors resets them.
-
-## Refactoring
-
-Several different solution branches have been provided. Please complete your own solution before taking a look at them:
-  - Did your's match any of the same patterns, or was it a novel solution?
-  - How could we make our application more DRY?
