@@ -162,7 +162,7 @@ changeColor = (newChildColor) => {
 }
 ```
 
-Now that is function takes in an argument, we see you update `Child`:
+Now that the function takes in an argument, we'll need to update the `onClick` of `Child` to be a function that invokes `this.props.handleColorChange` and passes in a random color as the argument:
 
 ```js
 class Child extends Component {
