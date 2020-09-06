@@ -49,74 +49,59 @@ The `Parent` component has a state called `color` that is initially set to a ran
 If we want to set the state, it would be easy to do so in an instance method like shown below:
 
 ```js
-class Parent extends Component {
-  constructor() {
-    super()
-    this.state = {
-      color: getRandomColor()
-    }
+function Parent() {
+  const [color, setColor] = useState(getRandomColor())
+
+  const handleChangeColor = () => {
+    setColor(getRandomColor())
   }
 
-  changeColor = () => {
-    this.setState({
-      color: getRandomColor()
-    })
-  }
-
-  render() {
-    return (
-      <div className="parent" style={{backgroundColor: this.state.color}}>
-        <Child />
-        <Child />
-      </div>
-    )
-  }
-}
-```
-
-But we are going to want to run this `changeColor()` method when either `Child`
-component is clicked. So we are going to pass this state changing function _as a
-prop_ to both `Child` components.
-
-```js
-render() {
   return (
-    <div className="parent" style={{backgroundColor: this.state.color}}>
-      <Child handleColorChange={this.changeColor}/>
-      <Child handleColorChange={this.changeColor}/>
+    <div className="parent" style={{ backgroundColor: color }}>
+      <Child />
+      <Child />
     </div>
   )
 }
 ```
 
-Now, `Child` will have a prop called `handleColorChange` that is a _function_.
-Specifically, it is the same function object as our `Parent`'s '`changeColor`
-instance method. Want to see for yourself? Put a `console.log` inside the `render`
-method of `Child`.
+But we are going to want to run this `handleChangeColor()` function when either `Child`
+component is clicked. So we are going to pass this state changing function _as a
+prop_ to both `Child` components.
 
 ```js
-class Child extends Component {
-  render() {
-    console.log(this.props)
-    return (
-      <div className="child" style={{backgroundColor: "#FFF"}}></div>
-    )
-  }
+return (
+  <div className="parent" style={{ backgroundColor: color }}>
+    <Child onChangeColor={handleChangeColor} />
+    <Child onChangeColor={handleChangeColor} />
+  </div>
+)
+```
+
+Now, `Child` will have a prop called `onChangeColor` that is a _function_.
+Specifically, it is the same function object as our `Parent`'s '`handleChangeColor`
+function. Want to see for yourself? Put a `console.log` inside the `Child` component.
+
+```js
+function Child(props) {
+  console.log(props)
+  return (
+    <div className="child" style={{backgroundColor: "#FFF"}} />
+  )
 }
 ```
 
-What we want to do now is pass this `handleColorChange` prop into a React event handler.
+What we want to do now is pass this `onChangeColor` prop into a React event handler.
 
 ```js
-render() {
-  console.log(this.props)
-  return (
-    <div onClick={this.props.handleColorChange}
-      className="child"
-      style={{backgroundColor: "#FFF"}}
-    ></div>
-  )
-}
+console.log(props)
+return (
+  <div 
+    onClick={props.onChangeColor}
+    className="child"
+    style={{backgroundColor: "#FFF"}}
+  />
+)
 ```
 
 And Ta-Da! Now, if you go to the app, clicking on _either_ of the white rectangle
@@ -136,14 +121,11 @@ Then, we let the `Parent` component handle the passing of that data to each of i
 children components.
 
 ```js
-class Parent extends Component {
-  constructor() {
-    super()
-    this.state = {
-      color: getRandomColor(),
-      childrenColor: '#FFF'
-    }
-  }
+function Parent() {
+  const [color, setColor] = useState(getRandomColor())
+  const [childrenColor, setChildrenColor] = useState('#FFF)
+
+  ...
 }
 ```
 
@@ -151,42 +133,37 @@ Since the data that represents the color of the two `Child` components lives in
 `Parent`, we should pass that data down as props:
 
 ```js
-render() {
-  return (
-    <div className="parent" style={{backgroundColor: this.state.color}}>
-      <Child color={this.state.childrenColor} handleColorChange={this.changeColor}/>
-      <Child color={this.state.childrenColor} handleColorChange={this.changeColor}/>
-    </div>
-  )
-}
+return (
+  <div className="parent" style={{ backgroundColor: color }}>
+    <Child color={childrenColor} onChangeColor={handleChangeColor} />
+    <Child color={childrenColor} onChangeColor={handleChangeColor} />
+  </div>
+)
 ```
 
 Now let's actually use that props data in the `Child` component
 
 ```js
-class Child extends Component {
-  render() {
-    return (
-      <div onClick={this.props.handleColorChange}
-        className="child"
-        style={{backgroundColor: this.props.color}}
-      ></div>
-    )
-  }
+function Child(props) {
+  return (
+    <div 
+      onClick={props.onChangeColor}
+      className="child" 
+      style={{backgroundColor: props.color}}
+    />
+  )
 }
 ```
 
-Lastly, we have to update the `changeColor()` method in `Parent` to change
+Lastly, we have to update the `handleChangeColor()` function in `Parent` to change
 not just the `color` state, but also the `childrenColor`. To practice sending
-data _back_ to the parent, let's change our `changeColor` to take in an argument
+data _back_ to the parent, let's change our `handleChangeColor` to take in an argument
 of `newChildColor`.
 
 ```js
-changeColor = (newChildColor) => {
-  this.setState({
-    color: getRandomColor(),
-    childrenColor: newChildColor
-  })
+const handleChangeColor = (newChildColor) => {
+  setColor(getRandomColor())
+  setChildrenColor(newChildColor)
 }
 ```
 
@@ -195,15 +172,14 @@ of `Child` to be a function that invokes `this.props.handleColorChange` and pass
 in a random color as the argument:
 
 ```js
-class Child extends Component {
-  render() {
-    return (
-      <div onClick={() => this.props.handleColorChange(getRandomColor())}
-        className="child"
-        style={{backgroundColor: this.props.color}}
-      ></div>
-    )
-  }
+function Child(props) {
+  return (
+    <div 
+      onClick={() => props.onChangeColor(getRandomColor())}
+      className="child" 
+      style={{backgroundColor: props.color}}
+    />
+  )
 }
 ```
 
