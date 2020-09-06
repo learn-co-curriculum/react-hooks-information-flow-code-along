@@ -123,7 +123,7 @@ children components.
 ```js
 function Parent() {
   const [color, setColor] = useState(getRandomColor())
-  const [childrenColor, setChildrenColor] = useState('#FFF)
+  const [childrenColor, setChildrenColor] = useState('#FFF')
 
   ...
 }
