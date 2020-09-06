@@ -1,24 +1,16 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { getRandomColor } from './randomColorGenerator.js'
 import Child from './Child'
 
-class Parent extends Component {
+function Parent() {
+  const [color, setColor] = useState(getRandomColor())
 
-  constructor() {
-    super()
-    this.state = {
-      color: getRandomColor()
-    }
-  }
-
-  render() {
-    return (
-      <div className="parent" style={{backgroundColor: this.state.color}}>
-        <Child />
-        <Child />
-      </div>
-    )
-  }
+  return (
+    <div className="parent" style={{ backgroundColor: color }}>
+      <Child />
+      <Child />
+    </div>
+  )
 }
 
 export default Parent
