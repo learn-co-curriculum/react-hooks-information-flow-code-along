@@ -11,7 +11,7 @@ In this lesson, we'll explore how to pass callback functions as props in order t
 
 ## How Does Information Flow Between Components?
 
-We already know, how to use props to pass information _down_ from parent to child. 
+We already know how to use props to pass information _down_ from parent to child. 
 But how would we do the reverse? How might we have a child component send data to 
 its parent component? In order to propagate information in the opposite direction, 
 we can send a callback functions _as a prop_ from the parent component to its child.
@@ -46,7 +46,7 @@ you that generates a random color.
 #### Changing the color of Parent
 
 The `Parent` component has a state called `color` that is initially set to a random color.
-If we want to set the state, it would be easy to do so in an instance method like shown below:
+If we want to set the state, it would be easy to do so in a function like shown below:
 
 ```js
 function Parent() {
@@ -91,7 +91,7 @@ function Child(props) {
 }
 ```
 
-What we want to do now is pass this `onChangeColor` prop into a React event handler.
+What we want to do now is use this `onChangeColor` prop as a React event handler.
 
 ```js
 console.log(props)
@@ -115,9 +115,9 @@ color to a random color, and the other `Child` component should change to _that 
 Now, we could put some state in our `Child` component to keep track of its color.
 However, React components cannot pass data between 'sibling' components. Data can
 only flow up and down between parent/child. So if we update the color of one `Child`
-component, we have no way to pass that  data to the _other_ `Child` component. The
+component, we have no way to pass that data to the _other_ `Child` component. The
 solution is to store the color of the `Child` in the state of the `Parent` component.
-Then, we let the `Parent` component handle the passing of that data to each of it's
+Then, we let the `Parent` component handle the passing of that data to each of its
 children components.
 
 ```js
