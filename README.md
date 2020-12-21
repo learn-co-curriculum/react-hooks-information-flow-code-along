@@ -11,23 +11,26 @@ In this lesson, we'll explore how to pass callback functions as props in order t
 
 ## How Does Information Flow Between Components?
 
-We already know how to use props to pass information _down_ from parent to child.
-But how would we do the reverse? How might we have a child component send data to
-its parent component? In order to propagate information in the opposite direction,
-we can send a callback functions _as a prop_ from the parent component to its child.
+We already know how to use props to pass information _down_ from parent to
+child. But how would we do the reverse? How might we have a **child** component
+send data _up_ to its **parent** component? In order to propagate information in
+the opposite direction, we can send a callback functions _as a prop_ from the
+parent component to its child.
 
 This allows the callback to be _owned_ by a different component than the one
 invoking it. Once invoked, the callback can send data to or change state in the
-parent component that _owns_ it, instead of the child component that _invoked_ it.
+parent component that _owns_ it, instead of the child component that _invoked_
+it.
 
 ## Getting Started
 
-Assuming you've pulled down the starter code and ran `npm install` and `npm start`,
-you should see a few rectangles in your browser. The large outer rectangle will be a
-random color every time you refresh the page, but the two smaller rectangles inside
-will always have a white background. Take a moment to familiarize yourself with the
-code base. We have a simple application that renders a single `Parent` component and
-two `Child` components. The component hierarchy is as followed:
+Assuming you've pulled down the starter code and ran `npm install` and
+`npm start`, you should see a few rectangles in your browser. The large outer
+rectangle will be a random color every time you refresh the page, but the two
+smaller rectangles inside will always have a white background. Take a moment to
+familiarize yourself with the code base. We have a simple application that
+renders a single `Parent` component and two `Child` components. The component
+hierarchy is as followed:
 
 ```
 App
@@ -38,15 +41,17 @@ App
 
 ## Deliverables
 
-- When either `Child` component is clicked, the `Parent` component should change color.
+- When either `Child` component is clicked, the `Parent` component should change
+  color.
 
-`src/randomColorGenerator.js` has a helper function `getRandomColor()` implemented for
-you that generates a random color.
+`src/randomColorGenerator.js` has a helper function `getRandomColor()`
+implemented for you that generates a random color.
 
-#### Changing the color of Parent
+### Changing the color of Parent
 
-The `Parent` component has a state called `color` that is initially set to a random color.
-If we want to set the state, it would be easy to do so in a function like shown below:
+The `Parent` component has a state called `color` that is initially set to a
+random color. If we want to set the state, it would be easy to do so in a
+function like shown below:
 
 ```js
 function Parent() {
@@ -81,8 +86,9 @@ return (
 ```
 
 Now, `Child` will have a prop called `onChangeColor` that is a _function_.
-Specifically, it is the same function object as our `Parent`'s '`handleChangeColor`
-function. Want to see for yourself? Put a `console.log` inside the `Child` component.
+Specifically, it is the same function object as our `Parent`'s
+'`handleChangeColor` function. Want to see for yourself? Put a `console.log`
+inside the `Child` component.
 
 ```js
 function Child(props) {
@@ -91,7 +97,8 @@ function Child(props) {
 }
 ```
 
-What we want to do now is use this `onChangeColor` prop as a React event handler.
+What we want to do now is use this `onChangeColor` prop as a React event
+handler.
 
 ```js
 console.log(props);
@@ -104,7 +111,7 @@ return (
 );
 ```
 
-And Ta-Da! Now, if you go to the app, clicking on _either_ of the white
+And ta-da! Now, if you go to the app, clicking on _either_ of the white
 rectangle `Child` components will cause the `Parent` component to change color!
 But let's add one more feature!
 
@@ -124,11 +131,11 @@ passing of that data to each of its children components.
 
 ```js
 function Parent() {
-  const randomColor = getRandomColor()
-  const [color, setColor] = useState(randomColor)
-  const [childrenColor, setChildrenColor] = useState('#FFF')
+  const randomColor = getRandomColor();
+  const [color, setColor] = useState(randomColor);
+  const [childrenColor, setChildrenColor] = useState("#FFF");
 
-  ...
+  // ...
 }
 ```
 
@@ -144,7 +151,7 @@ return (
 );
 ```
 
-Now let's actually use that props data in the `Child` component
+Now let's actually use that props data in the `Child` component:
 
 ```js
 function Child(props) {
@@ -193,9 +200,9 @@ component is clicked, the `Parent` changes to a random color, but also, both
 
 ## Summary
 
-- For information to propagate _down_ the component tree, parents pass `props`
+- For information to propagate **down** the component tree, parents pass `props`
   to their children
-- For information to propagate _up_ the component tree, we typically invoke
+- For information to propagate **up** the component tree, we typically invoke
   callbacks that were passed from parents to children as `props`
 - Components of the same level (sibling components) cannot communicate directly!
   We can only communicate up and down the component tree. So if multiple
