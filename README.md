@@ -32,14 +32,14 @@ familiarize yourself with the code base. We have a simple application that
 renders a single `Parent` component and two `Child` components. The component
 hierarchy is as followed:
 
-```
+```txt
 App
 └───Parent
     ├───Child
     └───Child
 ```
 
-## Deliverables
+## Deliverables Part 1
 
 - When either `Child` component is clicked, the `Parent` component should change
   color.
@@ -58,10 +58,10 @@ function Parent() {
   const randomColor = getRandomColor();
   const [color, setColor] = useState(randomColor);
 
-  const handleChangeColor = () => {
+  function handleChangeColor() {
     const newRandomColor = getRandomColor();
     setColor(newRandomColor);
-  };
+  }
 
   return (
     <div className="parent" style={{ backgroundColor: color }}>
@@ -115,7 +115,7 @@ And ta-da! Now, if you go to the app, clicking on _either_ of the white
 rectangle `Child` components will cause the `Parent` component to change color!
 But let's add one more feature!
 
-## Deliverables
+## Deliverables Part 2
 
 - When either `Child` component is clicked, it should change to its own
   background color to a random color, and the other `Child` component should
