@@ -56,7 +56,7 @@ The `Parent` component has a state variable called `color` that is initially set
 to a random color. If we want to update state, it would be easy to do so in a
 function like shown below:
 
-```js
+```jsx
 function Parent() {
   const randomColor = getRandomColor();
   const [color, setColor] = useState(randomColor); // initial value for color state
@@ -79,7 +79,7 @@ But we are going to want to run this `handleChangeColor()` function when either
 `Child` component is clicked. So we are going to pass this state changing
 function _as a prop_ to both `Child` components.
 
-```js
+```jsx
 return (
   <div className="parent" style={{ backgroundColor: color }}>
     <Child onChangeColor={handleChangeColor} />
@@ -93,7 +93,7 @@ Specifically, it is the same function object as our `Parent`'s
 '`handleChangeColor` function. Want to see for yourself? Put a `console.log`
 inside the `Child` component.
 
-```js
+```jsx
 function Child({ onChangeColor }) {
   console.log(onChangeColor);
   return <div className="child" style={{ backgroundColor: "#FFF" }} />;
@@ -102,7 +102,7 @@ function Child({ onChangeColor }) {
 
 We can now use this `onChangeColor` prop as an event handler:
 
-```js
+```jsx
 console.log(onChangeColor);
 return (
   <div
@@ -146,7 +146,7 @@ The solution is to store the color of the `Child` in the state of the `Parent`
 component. Then, we let the `Parent` component handle the passing of that data
 to each of its children components.
 
-```js
+```jsx
 function Parent() {
   const randomColor = getRandomColor();
   const [color, setColor] = useState(randomColor);
@@ -159,7 +159,7 @@ function Parent() {
 Since the data that represents the color of the two `Child` components lives in
 `Parent`, we should pass that data down as props:
 
-```js
+```jsx
 return (
   <div className="parent" style={{ backgroundColor: color }}>
     <Child color={childrenColor} onChangeColor={handleChangeColor} />
@@ -170,7 +170,7 @@ return (
 
 Now let's actually use that props data in the `Child` component:
 
-```js
+```jsx
 function Child({ onChangeColor, color }) {
   return (
     <div
@@ -187,7 +187,7 @@ change not just the `color` state, but also the `childrenColor`. To practice
 sending data _back_ to the parent, let's change our `handleChangeColor` to take
 in an argument of `newChildColor`:
 
-```js
+```jsx
 function handleChangeColor(newChildColor) {
   const newRandomColor = getRandomColor();
   setColor(newRandomColor);
@@ -199,7 +199,7 @@ Now that the function takes in an argument, we'll need to update the `onClick`
 of `Child` to be a function that invokes `this.props.handleColorChange` and passes
 in a random color as the argument:
 
-```js
+```jsx
 function Child({ onChangeColor, color }) {
   function handleClick() {
     const newColor = getRandomColor();
