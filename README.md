@@ -229,7 +229,9 @@ For information to propagate **down** the component tree, parents pass `props`
 to their children.
 
 For information to propagate **up** the component tree, we must invoke
-**callbacks** that were passed from parents to children as `props`.
+**callbacks** that were passed from parents to children as `props`. When
+invoking the callback, we can pass any needed values from the child component to
+the parent component as arguments.
 
 Components of the same level (sibling components) cannot communicate directly!
 We can only communicate up and down the component tree. So if multiple
